@@ -60,6 +60,7 @@ public class CreateTestData implements ApplicationRunner {
         Rider rider4 = new Rider("Geoffrey Bouchard", LocalDate.of(1992,4,1), "Frankrig", AG2RCitroenTeam);
         //rider1.setRideTime(LocalTime.of(1, 15, 12));
         rider4.setRideTime(Duration.ofSeconds(9276));
+        rider4.setMountainPoints(10);
         riderRepository.save(rider4);
 
         Rider rider2 = new Rider("Daniel Arroyave Cañas", LocalDate.of(2000,6,19), "Columbia", EFEducationEasyPost);
@@ -70,6 +71,7 @@ public class CreateTestData implements ApplicationRunner {
         Rider rider3 = new Rider("Carlos Barbero", LocalDate.of(1991,4,29), "Spanien", LottoSoudal);
         //rider3.setRideTime(LocalTime.of(1, 45, 23));
         rider3.setRideTime(Duration.ofSeconds(9987));
+        rider3.setSprintPoints(5);
         riderRepository.save(rider3);
 
     }
