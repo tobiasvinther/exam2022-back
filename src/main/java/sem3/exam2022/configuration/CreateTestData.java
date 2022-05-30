@@ -11,6 +11,7 @@ import sem3.exam2022.repositories.CountryRepository;
 import sem3.exam2022.repositories.RiderRepository;
 import sem3.exam2022.repositories.TeamRepository;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -47,15 +48,22 @@ public class CreateTestData implements ApplicationRunner {
 
     public void createRiders() {
         Rider rider1 = new Rider("Clément Berthet", LocalDate.of(1997,8,2), "Frankrig", AG2RCitroenTeam);
-        rider1.setRideTime(LocalTime.of(1, 15, 12));
+        //rider1.setRideTime(LocalTime.of(1, 15, 12));
+        rider1.setRideTime(Duration.ofSeconds(7699));
         riderRepository.save(rider1);
+        Rider rider4 = new Rider("Geoffrey Bouchard", LocalDate.of(1992,4,1), "Frankrig", AG2RCitroenTeam);
+        //rider1.setRideTime(LocalTime.of(1, 15, 12));
+        rider4.setRideTime(Duration.ofSeconds(9276));
+        riderRepository.save(rider4);
 
         Rider rider2 = new Rider("Daniel Arroyave Cañas", LocalDate.of(2000,6,19), "Columbia", EFEducationEasyPost);
-        rider2.setRideTime(LocalTime.of(1, 20, 0));
+        //rider2.setRideTime(LocalTime.of(1, 20, 0));
+        rider2.setRideTime(Duration.ofSeconds(8234));
         riderRepository.save(rider2);
 
         Rider rider3 = new Rider("Carlos Barbero", LocalDate.of(1991,4,29), "Spanien", LottoSoudal);
-        rider3.setRideTime(LocalTime.of(1, 45, 23));
+        //rider3.setRideTime(LocalTime.of(1, 45, 23));
+        rider3.setRideTime(Duration.ofSeconds(9987));
         riderRepository.save(rider3);
 
     }

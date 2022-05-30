@@ -6,8 +6,10 @@ import lombok.Setter;
 import sem3.exam2022.dtos.RiderRequest;
 
 import javax.persistence.*;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Getter
@@ -20,7 +22,8 @@ public class Rider {
     private String name;
     private LocalDate birthDay;
     private String country; //change this to Country entity with country name and flag perhaps?
-    private LocalTime rideTime;
+    //private LocalTime rideTime;
+    private Duration rideTime;
     private int sprintPoints;
     private int mountainPoints;
     @ManyToOne()
@@ -32,7 +35,8 @@ public class Rider {
         this.country = country;
         this.team = team;
 
-        this.rideTime = LocalTime.of(0,0,0);
+        //this.rideTime = LocalTime.of(0,0,0);
+        this.rideTime = Duration.of(0, ChronoUnit.SECONDS);
         this.sprintPoints = 0;
         this.mountainPoints = 0;
 
@@ -47,7 +51,8 @@ public class Rider {
         this.team = team;
 
         this.birthDay = LocalDate.of(2000, 1, 1);
-        this.rideTime = LocalTime.of(0,0,0);
+        //this.rideTime = LocalTime.of(0,0,0);
+        this.rideTime = Duration.of(0, ChronoUnit.SECONDS);
         this.sprintPoints = 0;
         this.mountainPoints = 0;
 
@@ -62,7 +67,8 @@ public class Rider {
         this.team = riderRequest.getTeam();
 
         this.birthDay = LocalDate.of(2000, 1, 1);
-        this.rideTime = LocalTime.of(0,0,0);
+        //this.rideTime = LocalTime.of(0,0,0);
+        this.rideTime = Duration.of(0, ChronoUnit.SECONDS);
         this.sprintPoints = 0;
         this.mountainPoints = 0;
 

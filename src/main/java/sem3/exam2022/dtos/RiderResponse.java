@@ -5,9 +5,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import sem3.exam2022.entities.Rider;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
@@ -18,7 +20,8 @@ public class RiderResponse {
     private String name;
     private LocalDate birthDay;
     private String country;
-    private LocalTime rideTime;
+    //private LocalTime rideTime;
+    private Duration rideTime;
     private int sprintPoints;
     private int mountainPoints;
     private String teamName;
@@ -37,6 +40,10 @@ public class RiderResponse {
     }
 
     public static List<RiderResponse> RiderResponsesFromEntities(List<Rider> ridersAsEntities){
+        return ridersAsEntities.stream().map(rider -> new RiderResponse(rider)).collect(Collectors.toList());
+    }
+
+    public static List<RiderResponse> RiderResponsesFromEntities(Set<Rider> ridersAsEntities){
         return ridersAsEntities.stream().map(rider -> new RiderResponse(rider)).collect(Collectors.toList());
     }
 }
