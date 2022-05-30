@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static sem3.exam2022.services.UtilityService.StringifyRideTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,6 +24,8 @@ public class RiderResponse {
     private String country;
     //private LocalTime rideTime;
     private Duration rideTime;
+    private String rideTimeString;
+    private long rideTimeLong;
     private int sprintPoints;
     private int mountainPoints;
     private String teamName;
@@ -37,6 +41,8 @@ public class RiderResponse {
         this.mountainPoints = riderAsEntity.getMountainPoints();
         this.teamName = riderAsEntity.getTeam().getTeamName();
         this.teamId = riderAsEntity.getTeam().getId();
+        this.rideTimeString = StringifyRideTime(this.rideTime);
+        this.rideTimeLong = riderAsEntity.getRideTime().toHours() + riderAsEntity.getRideTime().toMinutes() + riderAsEntity.getRideTime().toSeconds();
     }
 
     public static List<RiderResponse> RiderResponsesFromEntities(List<Rider> ridersAsEntities){

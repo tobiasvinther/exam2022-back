@@ -10,7 +10,6 @@ import sem3.exam2022.repositories.TeamRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class RiderService {
@@ -40,9 +39,6 @@ public class RiderService {
     }
 
     public RiderResponse addRider(RiderRequest requestBody) {
-        //- Find party by name provided
-        //- Create CandidateRequest and add the party we found by using provided partyName
-        //- Create new Candidate entity and save it in the repository
         Team team = teamRepository.findTeamByTeamName(requestBody.getTeamName());
         System.out.println("Found team: " + team);
         RiderRequest riderRequest = new RiderRequest(requestBody.getName(), requestBody.getCountry(), team);
@@ -67,4 +63,5 @@ public class RiderService {
         riderRepository.delete(riderToDelete);
         System.out.println("Rider: " + riderToDelete.getName() + " deleted");
     }
+
 }
