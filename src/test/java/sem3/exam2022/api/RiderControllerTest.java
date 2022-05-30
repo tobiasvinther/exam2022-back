@@ -1,6 +1,5 @@
 package sem3.exam2022.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,10 +14,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import sem3.exam2022.entities.Rider;
 import sem3.exam2022.entities.Team;
 import sem3.exam2022.repositories.RiderRepository;
-import sem3.exam2022.services.RiderService;
+import sem3.exam2022.repositories.TeamRepository;
 
 import java.time.LocalDate;
 
+import static org.hamcrest.Matchers.containsString;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,9 +33,8 @@ class RiderControllerTest {
 
     @Autowired
     RiderRepository riderRepository;
-
-    //@Autowired
-    //private ObjectMapper objectMapper;
+    @Autowired
+    TeamRepository teamRepository;
 
     static int rider1Id;
     static Team AG2RCitroenTeam;
@@ -43,12 +42,14 @@ class RiderControllerTest {
     @BeforeEach
     void setUp() {
         AG2RCitroenTeam = new Team("AG2R Citroën Team");
+        teamRepository.save(AG2RCitroenTeam);
         rider1Id = riderRepository.save(new Rider("Tobias Vinther", LocalDate.of(1985,2,1), "Danmark", AG2RCitroenTeam)).getId();
-
+        rider1Id = riderRepository.save(new Rider("Bjarne Riis", LocalDate.of(1965,2,1), "Danmark", AG2RCitroenTeam)).getId();
     }
 
     @AfterEach
     void tearDown() {
+        teamRepository.deleteAll();
         riderRepository.deleteAll();
     }
 
@@ -65,5 +66,19 @@ class RiderControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("Tobias Vinther"));
         System.out.println("---End of getRiderById_test---");
 
+    }
+
+    @Test
+    public void getAllRiders_test() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/api/riders")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.length()").value(2))
+                .andExpect(MockMvcResultMatchers.content().string(containsString("Bjarne Riis")))
+                .andExpect(MockMvcResultMatchers.content().string(containsString("Danmark")));
+        System.out.println("---End of getAllRiders_test---");
     }
 }

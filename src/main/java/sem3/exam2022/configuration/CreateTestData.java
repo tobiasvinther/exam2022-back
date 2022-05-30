@@ -46,6 +46,12 @@ public class CreateTestData implements ApplicationRunner {
         teamRepository.save(LottoSoudal);
     }
 
+    public void createCountries() {
+        France = new Country("Frankrig", "https://flagcdn.com/h20/fr.png");
+        Columbia = new Country("Columbia", "https://flagcdn.com/h20/co.png");
+        Spain = new Country("Spanien", "https://flagcdn.com/h20/es.png");
+    }
+
     public void createRiders() {
         Rider rider1 = new Rider("Clément Berthet", LocalDate.of(1997,8,2), "Frankrig", AG2RCitroenTeam);
         //rider1.setRideTime(LocalTime.of(1, 15, 12));
