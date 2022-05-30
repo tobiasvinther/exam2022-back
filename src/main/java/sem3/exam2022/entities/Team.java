@@ -32,4 +32,8 @@ public class Team {
         rider.setTeam(this); //for en sikkerheds skyld sætter vi også kandidatens parti til dette parti
     }
 
+    public void deleteRiderFromTeam(Rider rider) {
+        teamMembers.remove(rider);
+    }
+
 }

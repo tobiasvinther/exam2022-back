@@ -37,4 +37,14 @@ public class RiderController {
     public RiderResponse addRider(@RequestBody RiderRequest requestBody) {
         return riderService.addRider(requestBody);
     }
+
+    @PatchMapping("/edit/{id}")
+    public RiderResponse editCandidate(@PathVariable int id, @RequestBody RiderRequest requestBody) throws Exception {
+        return riderService.editRider(id, requestBody);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteRider(@PathVariable int id) throws Exception {
+        riderService.deleteRider(id);
+    }
 }

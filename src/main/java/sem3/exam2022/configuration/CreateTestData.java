@@ -12,6 +12,7 @@ import sem3.exam2022.repositories.RiderRepository;
 import sem3.exam2022.repositories.TeamRepository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Controller
 @Profile("!test")
@@ -46,12 +47,15 @@ public class CreateTestData implements ApplicationRunner {
 
     public void createRiders() {
         Rider rider1 = new Rider("Clément Berthet", LocalDate.of(1997,8,2), "Frankrig", AG2RCitroenTeam);
+        rider1.setRideTime(LocalTime.of(1, 15, 12));
         riderRepository.save(rider1);
 
         Rider rider2 = new Rider("Daniel Arroyave Cañas", LocalDate.of(2000,6,19), "Columbia", EFEducationEasyPost);
+        rider2.setRideTime(LocalTime.of(1, 20, 0));
         riderRepository.save(rider2);
 
         Rider rider3 = new Rider("Carlos Barbero", LocalDate.of(1991,4,29), "Spanien", LottoSoudal);
+        rider3.setRideTime(LocalTime.of(1, 45, 23));
         riderRepository.save(rider3);
 
     }

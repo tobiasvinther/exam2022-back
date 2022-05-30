@@ -69,4 +69,12 @@ public class Rider {
         this.team.addRiderToTeam(this);
     }
 
+    /*
+    public void setTeam(Team newTeam) {
+        this.team.getTeamMembers().remove(this); //remove rider from current team's list of riders
+        this.team = newTeam; //set team to new team
+        newTeam.addRiderToTeam(this); //add rider to the new team's list of riders
+    }
+     */
+
 }

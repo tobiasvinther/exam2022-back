@@ -50,4 +50,21 @@ public class RiderService {
         riderRepository.save(newRider);
         return new RiderResponse(newRider);
     }
+
+    public RiderResponse editRider(int id, RiderRequest requestBody) throws Exception {
+        Rider riderToEdit = riderRepository.findById(id).orElseThrow(() -> new Exception("No rider with this id exists"));
+        riderToEdit.setName(requestBody.getName());
+        riderToEdit.setCountry(requestBody.getCountry());
+        Team team = teamRepository.findTeamByTeamName(requestBody.getTeamName());
+        riderToEdit.setTeam(team);
+        riderRepository.save(riderToEdit);
+        return new RiderResponse(riderToEdit);
+    }
+
+    public void deleteRider(int id) throws Exception {
+        Rider riderToDelete = riderRepository.findById(id).orElseThrow(() -> new Exception("No rider with this id exists"));
+        riderToDelete.getTeam().deleteRiderFromTeam(riderToDelete);
+        riderRepository.delete(riderToDelete);
+        System.out.println("Rider: " + riderToDelete.getName() + " deleted");
+    }
 }
