@@ -33,7 +33,7 @@ public class RiderService {
     }
 
     public List<RiderResponse> getRidersFromTeam(int id) throws Exception {
-        Team team = teamRepository.findById(id).orElseThrow(()-> new Exception("No party with provided id found"));
+        Team team = teamRepository.findById(id).orElseThrow(()-> new Exception("No team with provided id found"));
         List<Rider>riderEntities = new ArrayList<>(team.getTeamMembers());
         return RiderResponse.RiderResponsesFromEntities(riderEntities);
     }
